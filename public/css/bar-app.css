@@ -1,11 +1,22 @@
-span.stars, span.stars span {
-    display: block;
-    background: url(stars.png) 0 -16px repeat-x;
-    width: 80px;
-    height: 16px;
+.bar-name {
+	display: block;
 }
 
-span.stars span {
-    background-position: 0 0;
+.rating-img {
+	display: inline-block;
 }
 
+.reviews {
+	display: block;
+}
+
+.bar-img {
+	display: block;
+	/*float: left;*/
+	/*width: 40%;*/
+}
+
+.text-block {
+	display: inline-block;
+	/*margin-left: 45%;*/
+}
