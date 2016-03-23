@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>bar App</title>
+    <script src="/lib/jQuery.2.2.1.js"></script>
+    <script src="/lib/bootstrap.3.3.6.js"></script>
+    <link href="/lib/bootstrap.3.3.6.css" rel="stylesheet">
+    <link href="/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="/lib/css/bar-app.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class='navbar navbar-default container'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='#' id='brand'>Bar App</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a class="twitter" id='twitter-a' href="/auth/twitter"><i class=
+          "fa fa-twitter" id='twitter'></i></a>
+        </li>
+        <li>
+          <a class="facebook" id='facebook-a' href="/auth/facebook"><i class=
+          "fa fa-facebook" id='facebook'></i></a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <form role="form">
+        <div class="form-group">
+          <input type="text" class="form-control" id="search-box" placeholder="Where are you at?">
+          <button type="submit" class="btn btn-default" id="search-button">Search</button>
+        </div>
+      </form>
+      <div id="search-results">
+      </div>
+    </div>
+    <script src="/javascripts/bar-app-main.js"></script>
+  </body>
+</html>
