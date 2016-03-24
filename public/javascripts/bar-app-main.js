@@ -1,5 +1,7 @@
 'use strict';
 
+var number = 0;
+
 $('#search-box').keypress(function(e){
 	if (e.which === 13){
 		var searchStr = $('#search-box').val()
@@ -26,6 +28,7 @@ function displayResults(result){
 	var div = "<div class='row bar'>"; 
 	div += "<div class='col-sm-3'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
+	div += "<button type='submit' class='btn btn-default btn-sm going'>" + number + " going" + "</button>";
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";
