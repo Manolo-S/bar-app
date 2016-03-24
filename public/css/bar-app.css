@@ -1,5 +1,6 @@
 .bar-name {
 	display: block;
+	font-size: 1.5em;
 }
 
 .rating-img {
@@ -12,11 +13,19 @@
 
 .bar-img {
 	display: block;
-	/*float: left;*/
-	/*width: 40%;*/
 }
 
 .text-block {
-	display: inline-block;
-	/*margin-left: 45%;*/
+	margin-top: 1em;
 }
+
+.bar {
+	margin-top: 4em;
+}
+
+@media screen and (min-width:768px){
+	.text-block {
+		margin-top: 5.5em;
+	}
+}
+

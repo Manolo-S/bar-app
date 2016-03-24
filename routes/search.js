@@ -12,7 +12,6 @@ var yelp = new Yelp({
 
 router.post('/', function(req, res){
 	var searchStr = req.body.searchStr;
-	console.log('search str router', searchStr);
 	yelp.search({ term: 'bar', location: searchStr })
 	.then(function (data) {
 	  res.json(data);
