@@ -18,12 +18,15 @@ $('#search-button').click(function(e){
     $.post('http://localhost:3000/search', {"searchStr": searchStr}, success);
 });
 
+function callback(){
 
+}
 
 function goingFun(bar){
-	if (bar.name === barName && bar.location.address[0] === address){
+	if (bar.name === barName && bar.location.address[0] + " " + bar.location.city === address){
 		console.log('barName', bar.name);
 		console.log('address', bar.location.address[0]);
+        $.post('http://localhost:3000/going', {"barName": barName, "address": address, "socialMedia": "Twitter", "id": 123}, callback);
 	}
 }
 
@@ -52,7 +55,7 @@ function displayResults(result){
 	var div = "<div class='row bar'>"; 
 	div += "<div class='col-sm-3'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
-	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + "'>" + number + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
+	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'>" + number + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";

@@ -5,9 +5,11 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var barModel = require('./config/barModel');
 
 var index = require('./routes/index');
 var search = require('./routes/search');
+var going = require('./routes/going');
 // var auth = require('./routes/auth');
 
 var app = express();
@@ -34,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/search', search);
+app.use('/going', going);
 // app.use('/auth', auth);
 
 
@@ -70,3 +73,26 @@ app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + server.address().port);
 });
+
+
+// var barModel = require('./config/barModel');
+
+// var bar = {"barName": "The Hamilton", "address": "998 Amsterdam Avenue New York", "going": [{"id": 1, "socialMedia": "Twitter"}, {"id": 9, "socialMedia": "Facebook"}]}
+
+// console.log(mongoose.connection.readyState);
+
+// if (mongoose.connection.readyState === 0) {
+//     var db = mongoose.connect('mongodb://localhost/bar-app');
+// 	// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall');
+// 	console.log('connected to db');
+// 	barModel.create(bar, function(err, bar) {
+// 		if (err) {
+// 			console.log('error storing bar', err)
+// 		} else {
+// 			mongoose.connection.close(function() {
+// 				console.log('Mongoose connection disconnected');
+// 			});
+// 		}
+// 	});
+// }
+
