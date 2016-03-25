@@ -1,6 +1,9 @@
 'use strict';
 
 var number = 0;
+var bars;
+var barName;
+var address;
 
 $('#search-box').keypress(function(e){
 	if (e.which === 13){
@@ -17,18 +20,39 @@ $('#search-button').click(function(e){
 
 
 
+function goingFun(bar){
+	if (bar.name === barName && bar.location.address[0] === address){
+		console.log('barName', bar.name);
+		console.log('address', bar.location.address[0]);
+	}
+}
+
+
 function success(results){
-	console.log(results);
+	// console.log(results);
 	$("#search-results").empty();
+	bars = results.businesses;
+	console.log('bars', bars);
 	results.businesses.map(displayResults)
+
+	$('.going').click(function(e){
+		e.preventDefault();
+		var target = $(e.target);
+		barName = target.siblings('a').text();
+		address = target.attr('id');
+		console.log('barName', barName, 'address', address);
+		bars.map(goingFun);
+	});
 };
+
+
 
 
 function displayResults(result){
 	var div = "<div class='row bar'>"; 
 	div += "<div class='col-sm-3'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
-	div += "<button type='submit' class='btn btn-default btn-sm going'>" + number + " going" + "</button>";
+	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + "'>" + number + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";
@@ -41,5 +65,11 @@ function displayResults(result){
 	div += "</div>";  // row
 	div += "</div>";  //container
 	$("#search-results").append(div);
+
+
 }
+
+// {"bar-name": "Hamilton", "address": "5th av", "city": "New York", "going": [{"id": 1, "social-media": "Twitter"}, {"id": 9, "social-media": "Facebook"}]}
+
+
 
