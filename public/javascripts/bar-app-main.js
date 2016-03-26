@@ -2,6 +2,7 @@
 
 var number = 0;
 var bars;
+var barsGoing;
 var barName;
 var address;
 
@@ -30,13 +31,27 @@ function goingFun(bar){
 	}
 }
 
+function peopleGoing(bar){
+	barsGoing.push({"barName": bar.name, "address": bar.location.address[0] + " " + bar.location.city});
+}
+
+function cb(err, results){
+	if (err){
+		console.log(err)
+	} else {
+		console.log(results.data);
+	}
+}
 
 function success(results){
 	// console.log(results);
 	$("#search-results").empty();
+	barsGoing = [];
 	bars = results.businesses;
 	console.log('bars', bars);
-	results.businesses.map(displayResults)
+	bars.map(peopleGoing);
+	$.post('http://localhost:3000/barsGoing', {'bars': barsGoing}, cb);
+	bars.map(displayResults);
 
 	$('.going').click(function(e){
 		e.preventDefault();

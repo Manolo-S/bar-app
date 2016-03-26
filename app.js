@@ -10,6 +10,7 @@ var barModel = require('./config/barModel');
 var index = require('./routes/index');
 var search = require('./routes/search');
 var going = require('./routes/going');
+var barsGoing = require('./routes/barsGoing');
 // var auth = require('./routes/auth');
 
 var app = express();
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/search', search);
 app.use('/going', going);
+app.use('/barsGoing', barsGoing);
 // app.use('/auth', auth);
 
 

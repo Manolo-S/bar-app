@@ -25,14 +25,17 @@ function callback(err, bar) {
 		barModel.create(barGoing, cb);
 	}	else {
 			var bar = bar[0];
-			if (bar.date !== "02/28/2016"){
-				barModel.update({"barName": barName,"address": address}, {"date": "02/28/2016", "going": [{"id": id, "socialMedia": socialMedia}]}, cb);
+			if (bar.date !== date() ){
+				console.log('data ongelijk');
+				barModel.update({"barName": barName,"address": address}, {"date": date(), "going": [{"id": id, "socialMedia": socialMedia}]}, cb);
 			}	else {
 					console.log('callback bar', bar);
 					bar.going.map(personIsGoing);
 					if (!going){
 						console.log(id, 'is added to going list');
 						barModel.update({"barName": barName,"address": address}, {$push: {going: {"id": id,"socialMedia": socialMedia}}}, {upsert: true}, cb);
+					} else {
+						going = false; //reset going 
 					}
 				}
 		}
@@ -68,8 +71,7 @@ router.post('/', function(req, res) {
 	address = req.body.address;
 	id = req.body.id;
 	socialMedia = req.body.socialMedia;
-	barGoing = {"barName": barName,	"address": address, "date": "02/28/2016", "going": [{"id": id,"socialMedia": socialMedia}]};
-	// barGoing = {"barName": barName,	"address": address, "date": date(), "going": [{"id": id,"socialMedia": socialMedia}]};
+	barGoing = {"barName": barName,	"address": address, "date": date(), "going": [{"id": id,"socialMedia": socialMedia}]};
 	findBar();
 });
 
