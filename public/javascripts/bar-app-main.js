@@ -5,6 +5,7 @@ var bars;
 var barsGoing;
 var barName;
 var address;
+var goingData = [];
 
 $('#search-box').keypress(function(e){
 	if (e.which === 13){
@@ -35,13 +36,43 @@ function peopleGoing(bar){
 	barsGoing.push({"barName": bar.name, "address": bar.location.address[0] + " " + bar.location.city});
 }
 
+function addGoingData(bar1){
+	goingData.map(function (bar2){if (bar1.barName === bar2.barName){bar1.going = bar2.numberGoing}})
+}
+
 function cb(err, results){
 	if (err){
-		console.log(err)
+		console.log('error', err);
+		console.log('cb called');
+		// console.log(err.data);
+		goingData = err;
+		bars.map(addGoingData);
+		bars.map(displayResults);
+		$('.going').click(function(e){
+			e.preventDefault();
+			var target = $(e.target);
+			barName = target.siblings('a').text();
+			address = target.attr('id');
+			console.log('barName', barName, 'address', address);
+			bars.map(goingFun);
+		});
 	} else {
-		console.log(results.data);
+	// 	console.log('cb called');
+	// 	console.log(results.data);
+	// 	goingData = results.data;
+	// 	bars.map(addGoingData);
+	// 	bars.map(displayResults);
+	// 	$('.going').click(function(e){
+	// 		e.preventDefault();
+	// 		var target = $(e.target);
+	// 		barName = target.siblings('a').text();
+	// 		address = target.attr('id');
+	// 		console.log('barName', barName, 'address', address);
+	// 		bars.map(goingFun);
+	// 	});
 	}
 }
+
 
 function success(results){
 	// console.log(results);
@@ -51,16 +82,16 @@ function success(results){
 	console.log('bars', bars);
 	bars.map(peopleGoing);
 	$.post('http://localhost:3000/barsGoing', {'bars': barsGoing}, cb);
-	bars.map(displayResults);
+	// bars.map(displayResults);
 
-	$('.going').click(function(e){
-		e.preventDefault();
-		var target = $(e.target);
-		barName = target.siblings('a').text();
-		address = target.attr('id');
-		console.log('barName', barName, 'address', address);
-		bars.map(goingFun);
-	});
+	// $('.going').click(function(e){
+	// 	e.preventDefault();
+	// 	var target = $(e.target);
+	// 	barName = target.siblings('a').text();
+	// 	address = target.attr('id');
+	// 	console.log('barName', barName, 'address', address);
+	// 	bars.map(goingFun);
+	// });
 };
 
 
@@ -70,7 +101,7 @@ function displayResults(result){
 	var div = "<div class='row bar'>"; 
 	div += "<div class='col-sm-3'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
-	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'>" + number + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
+	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'>" + result.going + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";
