@@ -8,6 +8,7 @@ var GoingSchema = new Schema({
 });
 
 var BarSchema = new Schema({
+	date: String,
 	barName: String,
 	address: String,
 	going: [GoingSchema]

@@ -86,7 +86,7 @@ var server = app.listen(app.get('port'), function() {
 // 	// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall');
 // 	console.log('connected to db');
 // 	barModel.create(bar, function(err, bar) {
-// 		if (err) {
+																																																												// 		if (err) {				
 // 			console.log('error storing bar', err)
 // 		} else {
 // 			mongoose.connection.close(function() {

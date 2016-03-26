@@ -8,26 +8,43 @@ var barName;
 var address;
 var id;
 var socialMedia;
+var going = false;
+
+
+function personIsGoing (person){
+	if (person.id === id && person.socialMedia === socialMedia){
+		going = true;
+	    console.log(id, "is removed from going list");
+	    barModel.update({"barName": barName,"address": address}, {$pull: {going: {"id": id,"socialMedia": socialMedia}}}, cb);
+	}
+}
 
 function callback(err, bar) {
 	if (bar[0] === undefined) {
-			console.log('no one going to this bar, yet');
-			barModel.create(barGoing, function(error, barnew) {
-				if (error) {
-					console.log('error storing bar', error)
-					mongoose.connection.close(function() {
-		        	console.log('Mongoose connection disconnected');
-		        	});
-				} else {
-							console.log('barcreate called');
-							mongoose.connection.close(function() {
-								console.log('Mongoose connection disconnected');
-						    });
-					    }
-	           });
+		console.log('no one going to this bar, yet');
+		barModel.create(barGoing, cb);
+	}	else {
+			var bar = bar[0];
+			if (bar.date !== "02/28/2016"){
+				barModel.update({"barName": barName,"address": address}, {"date": "02/28/2016", "going": [{"id": id, "socialMedia": socialMedia}]}, cb);
+			}	else {
+					console.log('callback bar', bar);
+					bar.going.map(personIsGoing);
+					if (!going){
+						console.log(id, 'is added to going list');
+						barModel.update({"barName": barName,"address": address}, {$push: {going: {"id": id,"socialMedia": socialMedia}}}, {upsert: true}, cb);
+					}
+				}
+		}
+}
+
+function cb (err, result) {
+	if (err) {
+		console.log(error);
 	} else {
-       		   barModel.update( {"barName": barName, "address": address}, { $push : { going : {"id": id, "socialMedia": socialMedia} } })
-	}
+		console.log(result);
+	  };
+	mongoose.connection.close(function() {console.log('Mongoose connection disconnected')});
 }
 
 
@@ -36,12 +53,14 @@ function findBar() {
 	if (mongoose.connection.readyState === 0) {
 		// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
 		var db = mongoose.connect('mongodb://localhost/bar-app');
-		// barModel.find({}, callback);
-		barModel.find({
-			"barName": barName,
-			"address": address
-		}, callback);
+		barModel.find({"barName": barName,"address": address}, callback);
 	}
+}
+
+function date(){
+	var dateObj = new Date();
+    var date = dateObj.getMonth() + "/" + dateObj.getDate() + "/" + dateObj.getFullYear();
+	return date;
 }
 
 router.post('/', function(req, res) {
@@ -49,46 +68,9 @@ router.post('/', function(req, res) {
 	address = req.body.address;
 	id = req.body.id;
 	socialMedia = req.body.socialMedia;
-    barGoing = {"barName": barName, "address": address, "going": [{"id": id, "socialMedia": socialMedia}]}
-    console.log('barGoing', barGoing);
-	// console.log(barName, address, id, socialMedia);
-	// console.log('address type', typeof(address));
+	barGoing = {"barName": barName,	"address": address, "date": "02/28/2016", "going": [{"id": id,"socialMedia": socialMedia}]};
+	// barGoing = {"barName": barName,	"address": address, "date": date(), "going": [{"id": id,"socialMedia": socialMedia}]};
 	findBar();
 });
 
 module.exports = router;
-
-
-// picModel.find({}, function(err, picsData){
-// 		allPics = picsData[0];
-// 		mongoose.connection.close(function(){
-// 			console.log('Mongoose connection disconnected');
-// 		});
-// 		next();
-// 	 });
-
-// function callback(){
-// 	console.log('callback', allPics)
-// 	picModel.create({
-// 		pics: allPics
-// 	}, function(err, pics){
-// 			if (err) {
-// 				console.log('error storing pics array', err) 
-// 			} else {
-// 				mongoose.connection.close(function() {
-// 		            console.log('Mongoose connection disconnected');
-// 	    		});
-// 			}
-// 	   } 
-//  	);
-// }
-
-
-// function storePic(){
-// 	console.log('store pic fun called')
-// 	// if (mongoose.connection.readyState === 0) { 
-// 		var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
-// 		// var db = mongoose.connect('mongodb://localhost/pic-wall');
-// 		picModel.remove({}, callback);
-// 	// }
-// }
