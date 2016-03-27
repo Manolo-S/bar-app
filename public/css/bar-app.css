@@ -1,3 +1,7 @@
+li span {
+	display: none;
+}
+
 #search-results {
 	margin-top: -2em;
 }
@@ -13,6 +17,7 @@
 
 .rating-img {
 	display: block;
+	margin-top: 0.3em;
 }
 
 .reviews {
@@ -23,9 +28,9 @@
 	display: block;
 }
 
-.text-block {
-	margin-top: 1em;
-}
+/*.text-block {
+	display: inline-block;
+}*/
 
 .bar {
 	margin-top: 4em;
@@ -33,11 +38,12 @@
 
 @media screen and (min-width:768px){
 	.text-block {
-		margin-top: 5.5em;
+		margin-top: 5.8em;
 	}
 }
 
 .going  {
 	display: inline-block;
 	margin-left: 1em;
+	margin-bottom: 0.3em;
 }
