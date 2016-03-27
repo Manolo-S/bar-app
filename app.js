@@ -2,6 +2,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
@@ -29,11 +30,12 @@ var yelp = new Yelp({
 app.use(bodyParser.urlencoded({extended:true}));
 
 
-require('./config/passport')(app);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret: 'anything'})); //TODO bekijk Express-session package
+require('./config/passport')(app);
 
 app.use('/', index);
 app.use('/search', search);
