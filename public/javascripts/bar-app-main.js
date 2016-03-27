@@ -37,7 +37,9 @@ function peopleGoing(bar){
 }
 
 function addGoingData(bar1){
-	goingData.map(function (bar2){if (bar1.barName === bar2.barName){bar1.going = bar2.numberGoing}})
+	console.log('addgoingdata called');
+	bar1.numberGoing = 0;
+	goingData.map(function (bar2){if (bar1.name === bar2.barName){console.log(bar1.name); bar1.numberGoing = bar2.numberGoing}});
 }
 
 function cb(err, results){
@@ -51,9 +53,18 @@ function cb(err, results){
 		$('.going').click(function(e){
 			e.preventDefault();
 			var target = $(e.target);
+			var numberGoing = Number(target.children('span').text());
+			if (target.children('span').attr('class') === 'not-going'){
+				numberGoing++;
+				target.children('span').removeClass('not-going').addClass('going');
+			} else {
+				numberGoing--;
+				target.children('span').removeClass('going').addClass('not-going');
+			}
+			target.children('span').text(numberGoing);
+			console.log('num going', numberGoing);
 			barName = target.siblings('a').text();
 			address = target.attr('id');
-			console.log('barName', barName, 'address', address);
 			bars.map(goingFun);
 		});
 	} else {
@@ -101,7 +112,7 @@ function displayResults(result){
 	var div = "<div class='row bar'>"; 
 	div += "<div class='col-sm-3'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
-	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'>" + result.going + " going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
+	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'><span class='not-going'>" + result.numberGoing + "</span> going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";
