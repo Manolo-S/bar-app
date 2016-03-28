@@ -32,10 +32,13 @@ li span {
 	margin-top: 4em;
 }
 
+.text-block {
+	margin-top: 0.5em;
+}
+
 @media screen and (min-width:768px){
 	.text-block {
 		margin-top: 3.4em;
-		margin-left: -3.5em;
 	}
 }
 
