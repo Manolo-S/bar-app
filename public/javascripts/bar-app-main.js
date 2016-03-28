@@ -96,8 +96,8 @@ function success(results){
 
 
 function displayResults(result){
-	var div = "<div class='container'>";
-	div += "<div class='row bar'>"; 
+	var div = "<div class='bar'>";
+	div += "<div class='row'>"; 
 	div += "<div class='col-sm-12'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
 	div += "<button type='submit' class='btn btn-default btn-sm going-button' id='" + result.location.address + " " + result.location.city + "'><span class='not-going'>" + result.numberGoing + "</span> going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
@@ -114,7 +114,7 @@ function displayResults(result){
 	div += '<p class="snippet">"' +  result.snippet_text + '"</p>';
 	div += "</div>"; // col-sm-8
 	div += "</div>";  // row 2
-	div += "</div>";  //container
+	div += "</div>"; 
 	$("#search-results").append(div);
 }
 
