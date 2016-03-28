@@ -96,20 +96,24 @@ function success(results){
 
 
 function displayResults(result){
-	var div = "<div class='row bar'>"; 
-	div += "<div class='col-sm-4'>";
+	var div = "<div class='container'>";
+	div += "<div class='row bar'>"; 
+	div += "<div class='col-sm-12'>";
 	div += "<a href=" + result.url + " class='bar-name' target='_blank'>" + result.name + "</a>";
-	div += "<button type='submit' class='btn btn-default btn-sm going' id='" + result.location.address + " " + result.location.city + "'><span class='not-going'>" + result.numberGoing + "</span> going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
+	div += "<button type='submit' class='btn btn-default btn-sm going-button' id='" + result.location.address + " " + result.location.city + "'><span class='not-going'>" + result.numberGoing + "</span> going" + "</button>"; //set id to address as two search results may have the same barname and different addresses 
+	div += "</div>"; //row 1
+	div += "<div class='row'>";
+	div += "<div class='col-sm-4'>";
 	div += "<img src=" + result.rating_img_url + " class='rating-img'>";
 	div += "<p class='reviews'>Reviews: " + result.review_count + "</p>";
 	div += "<img src=" + result.image_url +" class='bar-img'>";
-	div += "</div>"; //col-sm-3
+	div += "</div>"; //col-sm-4
 	div += "<div class='col-sm-8 text-block'>";
 	div += "<p>Address: " + result.location.address[0] + ", " + result.location.city + "</p>";
 	div += "<p>Phone: " + result.display_phone + "</p>";
 	div += '<p class="snippet">"' +  result.snippet_text + '"</p>';
-	div += "</div>"; // col-sm-9
-	div += "</div>";  // row
+	div += "</div>"; // col-sm-8
+	div += "</div>";  // row 2
 	div += "</div>";  //container
 	$("#search-results").append(div);
 }

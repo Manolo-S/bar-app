@@ -41,8 +41,12 @@ li span {
 		margin-top: 5.8em;
 	}
 }
-
+/*
 .going, .not-going  {
 	display: inline-block;
 	margin-bottom: 0.3em;
+}
+*/
+.going-button {
+	margin-left: 0.3em;
 }
