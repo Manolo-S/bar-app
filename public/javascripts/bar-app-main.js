@@ -4,6 +4,8 @@ var barsGoing;
 var barName;
 var address;
 var goingData = [];
+var id;
+var socialMedia;
 
 $('#search-box').keypress(function(e){
 	if (e.which === 13){
@@ -29,7 +31,7 @@ function goingFun(bar){
 		console.log('barName', bar.name);
 		console.log('address', bar.location.address[0]);
         // $.post('http://localhost:3000/going', {"barName": barName, "address": address, "socialMedia": "Twitter", "id": 456}, callback);
-        $.post('https://local-bars.herokuapp.com/going', {"barName": barName, "address": address, "socialMedia": "Twitter", "id": 456}, callback);
+        $.post('https://local-bars.herokuapp.com/going', {"barName": barName, "address": address, "socialMedia": socialMedia, "id": id}, callback);
 	}
 }
 
@@ -63,6 +65,9 @@ function cb(data){
 			console.log('num going', numberGoing);
 			barName = target.siblings('a').text();
 			address = target.attr('id');
+			id = $('#id').text();
+			socialMedia = $('#service').text();
+			console.log('id', id, 'socialmedia', socialMedia);
 			bars.map(goingFun);
 		});
 }
