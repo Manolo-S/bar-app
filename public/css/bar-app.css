@@ -2,10 +2,6 @@ li span {
 	display: none;
 }
 
-a {
-	margin-left: -1em;
-}
-
 #search-results {
 	margin-top: -2em;
 }
@@ -31,12 +27,7 @@ a {
 .bar-img {
 	display: block;
 }
-/*
-.text-block {
-	display: inline-block;
-	margin-top: 3.2em;
-}
-*/
+
 .bar {
 	margin-top: 4em;
 }
@@ -44,6 +35,7 @@ a {
 @media screen and (min-width:768px){
 	.text-block {
 		margin-top: 3.4em;
+		margin-left: -3.5em;
 	}
 }
 
