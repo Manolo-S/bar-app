@@ -52,6 +52,12 @@ function cb(data){
 		bars.map(displayResults);
 		$('.going').click(function(e){
 			e.preventDefault();
+			id = $('#id').text();
+			socialMedia = $('#service').text();
+			console.log("*" + id + "*");
+			if (id === ""){
+				return;
+			}
 			var target = $(e.target);
 			var numberGoing = Number(target.children('span').text());
 			if (target.children('span').attr('class') === 'not-going'){
@@ -65,13 +71,6 @@ function cb(data){
 			console.log('num going', numberGoing);
 			barName = target.siblings('a').text();
 			address = target.attr('id');
-			id = $('#id').text();
-			socialMedia = $('#service').text();
-			console.log("*" + id + "*");
-			// if (idsocialMedia !== "Facebook" && socialMedia !== "Twitter"){
-				// return;
-			// }
-			console.log('id', id, 'socialmedia', socialMedia);
 			bars.map(goingFun);
 		});
 }
