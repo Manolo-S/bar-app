@@ -67,7 +67,7 @@ function cb(data){
 			address = target.attr('id');
 			id = $('#id').text();
 			socialMedia = $('#service').text();
-			if (id === ""){
+			if (socialMedia !== "Facebook" && socialMedia !== "Twitter"){
 				return;
 			}
 			console.log('id', id, 'socialmedia', socialMedia);
