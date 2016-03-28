@@ -67,9 +67,10 @@ function cb(data){
 			address = target.attr('id');
 			id = $('#id').text();
 			socialMedia = $('#service').text();
-			if (socialMedia !== "Facebook" && socialMedia !== "Twitter"){
-				return;
-			}
+			console.log("*" + id + "*");
+			// if (idsocialMedia !== "Facebook" && socialMedia !== "Twitter"){
+				// return;
+			// }
 			console.log('id', id, 'socialmedia', socialMedia);
 			bars.map(goingFun);
 		});
