@@ -22,6 +22,12 @@ $('#search-button').click(function(e){
     $.post('https://local-bars.herokuapp.com/search', {"searchStr": searchStr}, success);
 });
 
+
+$('#twitter-a, #facebook-a').click(function(e){
+	var searchStr = $('#search-box').val();
+	store.set('searchStr', searchStr);
+});
+
 function callback(){
 
 }
@@ -108,6 +114,13 @@ function displayResults(result){
 	$("#search-results").append(div);
 }
 
+if (store.get('searchStr')) {
+	var searchStr = store.get('searchStr');
+	if (searchStr !== ""){
+		$.post('https://local-bars.herokuapp.com/search', {"searchStr": searchStr}, success);
+	}
+	store.remove('searchStr');
+}
 
 
 
