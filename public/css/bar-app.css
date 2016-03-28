@@ -43,10 +43,11 @@ a {
 
 @media screen and (min-width:768px){
 	.text-block {
-		margin-top: 3.2em;
+		margin-top: 3.4em;
 	}
 }
 
 .going-button {
 	margin-left: 1em;
+	margin-bottom: 0.2em;
 }
