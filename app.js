@@ -2,7 +2,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
+// var cookieParser = require('cookie-parser');
 var passport = require('passport');
 var session = require('express-session');
 var mongoose = require('mongoose');
@@ -15,6 +15,7 @@ var barsGoing = require('./routes/barsGoing');
 var auth = require('./routes/auth');
 
 var app = express();
+var Mongostore = require('connect-mongo')(session);
 // var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
 
 var Yelp = require('yelp');
@@ -26,15 +27,19 @@ var yelp = new Yelp({
   token_secret: 'RM2kWtLwjpzyjV1vAq61EGAVcas',
 });
 
-
 app.use(bodyParser.urlencoded({extended:true}));
-
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'anything'})); //TODO bekijk Express-session package
+app.use(session({ 
+	secret: 'anything',
+	store: new Mongostore({
+		url: 'mongodb://piet:snot@ds025389.mlab.com:25389/local-bars'
+	})	
+})); //TODO bekijk Express-session package
+
 require('./config/passport')(app);
 
 app.use('/', index);
