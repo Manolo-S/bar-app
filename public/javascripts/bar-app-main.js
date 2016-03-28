@@ -67,6 +67,9 @@ function cb(data){
 			address = target.attr('id');
 			id = $('#id').text();
 			socialMedia = $('#service').text();
+			if (id === "none"){
+				return;
+			}
 			console.log('id', id, 'socialmedia', socialMedia);
 			bars.map(goingFun);
 		});
