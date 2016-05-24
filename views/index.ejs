@@ -11,22 +11,30 @@
     <link href="/css/bar-app.css" rel="stylesheet">
   </head>
   <body>
-    <nav class='navbar navbar-default container'>
+    <nav class='navbar navbar-default container-fluid navigation-bar'>
       <div class='navbar-header'>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
         <a class='navbar-brand' href='#' id='brand'>Bar App</a>
       </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a class="twitter" id='twitter-a' href="/auth/twitter"><i class=
-          "fa fa-twitter" id='twitter'></i></a>
-        </li>
-        <li>
-          <a class="facebook" id='facebook-a' href="/auth/facebook"><i class=
-          "fa fa-facebook" id='facebook'></i></a>
-        </li>
-        <li><span id='id'><%=user.id%></span></li>
-        <li><span id='service'><%=user.service%></span></li>
-      </ul>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="twitter" id='twitter-a' href="/auth/twitter"><i class=
+            "fa fa-twitter" id='twitter'></i></a>
+          </li>
+          <li>
+            <a class="facebook" id='facebook-a' href="/auth/facebook"><i class=
+            "fa fa-facebook" id='facebook'></i></a>
+          </li>
+          <li><span id='id'><%=user.id%></span></li>
+          <li><span id='service'><%=user.service%></span></li>
+        </ul>
+      </div>
     </nav>
     <div class="container">
       <form role="form">
@@ -42,6 +50,3 @@
     <script src="/javascripts/bar-app-main.js"></script>
   </body>
 </html>
-
-
-

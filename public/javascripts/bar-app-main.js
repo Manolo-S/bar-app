@@ -32,6 +32,7 @@ function callback(){
 
 }
 
+
 function goingFun(bar){
 	if (bar.name === barName && bar.location.address[0] + " " + bar.location.city === address){
 		console.log('barName', bar.name);
