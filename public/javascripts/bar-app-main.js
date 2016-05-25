@@ -57,7 +57,8 @@ function cb(data){
 		goingData = data;
 		bars.map(addGoingData);
 		bars.map(displayResults);
-		$('.going').click(function(e){
+		$('.going-button').click(function(e){
+			console.log('going button');
 			e.preventDefault();
 			id = $('#id').text();
 			socialMedia = $('#service').text();
