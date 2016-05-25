@@ -1,5 +1,5 @@
 'use strict';
-var baseUrl = 'https://find-local-bars.herokuapp.com/';
+var baseUrl = 'https://local-bars.herokuapp.com/';
 var bars;
 var barsGoing;
 var barName;
