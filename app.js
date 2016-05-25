@@ -15,7 +15,6 @@ var auth = require('./routes/auth');
 
 var app = express();
 var Mongostore = require('connect-mongo')(session);
-// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
 
 var Yelp = require('yelp');
  
