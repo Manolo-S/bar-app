@@ -125,6 +125,3 @@ if (store.get('searchStr')) {
 	store.remove('searchStr');
 }
 
-
-
-git 
