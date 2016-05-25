@@ -42,7 +42,7 @@ require('./config/passport')(app);
 app.use('/', index);
 app.use('/search', search);
 app.use('/going', going);
-app.use('/barsGoing', barsGoing);
+app.use('/barsgoing', barsGoing);
 app.use('/auth', auth);
 
 
