@@ -53,12 +53,12 @@ function cb (err, result) {
 
 function findBar() {
 	console.log('findBar() called')
-	if (mongoose.connection.readyState === 0) {
+	// if (mongoose.connection.readyState === 0) {
 		var db = mongoose.connect('mongodb://piet:snot@ds025389.mlab.com:25389/local-bars');
 		// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
 		// var db = mongoose.connect('mongodb://localhost/bar-app');
 		barModel.find({"barName": barName,"address": address}, callback);
-	}
+	// }
 }
 
 function date(){
