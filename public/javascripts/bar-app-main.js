@@ -1,5 +1,4 @@
 'use strict';
-var baseUrl = 'https://local-bars.herokuapp.com/';
 var bars;
 var barsGoing;
 var barName;
@@ -11,14 +10,16 @@ var socialMedia;
 $('#search-box').keypress(function(e){
 	if (e.which === 13){
 		var searchStr = $('#search-box').val()
-        $.post(baseUrl + 'search', {"searchStr": searchStr}, success);
+        // $.post('http://localhost:3000/search', {"searchStr": searchStr}, success);
+        $.post('https://local-bars.herokuapp.com/search', {"searchStr": searchStr}, success);
 	}
 });
 
 $('#search-button').click(function(e){
 	e.preventDefault();
 	var searchStr = $('#search-box').val()
-    $.post(baseUrl + 'search', {"searchStr": searchStr}, success);
+    // $.post('http://localhost:3000/search', {"searchStr": searchStr}, success);
+    $.post('https://local-bars.herokuapp.com/search', {"searchStr": searchStr}, success);
 });
 
 
@@ -36,7 +37,8 @@ function goingFun(bar){
 	if (bar.name === barName && bar.location.address[0] + " " + bar.location.city === address){
 		console.log('barName', bar.name);
 		console.log('address', bar.location.address[0]);
-        $.post(baseUrl + 'going', {"barName": barName, "address": address, "socialMedia": socialMedia, "id": id}, callback);
+        // $.post('http://localhost:3000/going', {"barName": barName, "address": address, "socialMedia": "Twitter", "id": 456}, callback);
+        $.post('https://local-bars.herokuapp.com/going', {"barName": barName, "address": address, "socialMedia": socialMedia, "id": id}, callback);
 	}
 }
 
@@ -87,7 +89,8 @@ function success(results){
 	bars = results.businesses;
 	console.log('bars', bars);
 	bars.map(peopleGoing);
-	$.post(baseUrl + 'barsgoing', {'bars': barsGoing}, cb);
+	// $.post('http://localhost:3000/barsGoing', {'bars': barsGoing}, cb);
+	$.post('https://local-bars.herokuapp.com/barsGoing', {'bars': barsGoing}, cb);
 };
 
 
@@ -120,8 +123,10 @@ function displayResults(result){
 if (store.get('searchStr')) {
 	var searchStr = store.get('searchStr');
 	if (searchStr !== ""){
-		$.post(baseUrl + 'search', {"searchStr": searchStr}, success);
+		$.post('https://local-bars.herokuapp.com/search', {"searchStr": searchStr}, success);
 	}
 	store.remove('searchStr');
 }
+
+
 
