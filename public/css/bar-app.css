@@ -8,8 +8,13 @@ li span {
 
 #search-button {
 	margin-top: 1em;
-	margin-bottom: -1em;
+	margin-bottom: -1em;	
+	background-color: #337AB7;
+	color: white;
 }
+
+
+
 
 .bar-name {
 	font-size: 1.5em;
@@ -45,4 +50,40 @@ li span {
 .going-button {
 	margin-left: 1em;
 	margin-bottom: 0.2em;
+}
+
+#twitter {
+	color: #1da1f2;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a
+{
+    /*font-size: 1.4em;*/
+
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover
+{
+    /*padding-bottom: 1.2em;*/
+
+    color: #222;
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-brand:focus
+{
+    /*padding-bottom: 1.2em;*/
+
+    color: #222;
+    background-color: #e7e7e7;
+}
+
+.navigation-bar
+{
+    background-color: #232f3e;
 }
