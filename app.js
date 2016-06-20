@@ -15,6 +15,13 @@ var auth = require('./routes/auth');
 
 var app = express();
 var Mongostore = require('connect-mongo')(session);
+var logger = require('./config/logger');
+
+mongoose.connection.on("error", function(err) {
+		  logger.error(err);
+});
+
+mongoose.connect('mongodb://piet:snot@ds025389.mlab.com:25389/local-bars');
 
 var Yelp = require('yelp');
  
@@ -78,6 +85,7 @@ app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
 	console.log('Express server listening on port ' + server.address().port);
+	logger.warn('bar app started');
 });
 
 

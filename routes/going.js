@@ -9,7 +9,7 @@ var address;
 var id;
 var socialMedia;
 var going = false;
-
+var logger = require('../config/logger');
 
 function personIsGoing (person){
 	if (person.id === id && person.socialMedia === socialMedia){
@@ -20,19 +20,20 @@ function personIsGoing (person){
 }
 
 function callback(err, bar) {
+	console.log('callback called');
+	if (err){
+		logger.error(err);
+		return;
+	}
 	if (bar[0] === undefined) {
-		console.log('no one going to this bar, yet');
 		barModel.create(barGoing, cb);
 	}	else {
 			var bar = bar[0];
 			if (bar.date !== date() ){
-				console.log('data ongelijk');
 				barModel.update({"barName": barName,"address": address}, {"date": date(), "going": [{"id": id, "socialMedia": socialMedia}]}, cb);
 			}	else {
-					console.log('callback bar', bar);
 					bar.going.map(personIsGoing);
 					if (!going){
-						console.log(id, 'is added to going list');
 						barModel.update({"barName": barName,"address": address}, {$push: {going: {"id": id,"socialMedia": socialMedia}}}, {upsert: true}, cb);
 					} else {
 						going = false; //reset going 
@@ -43,23 +44,28 @@ function callback(err, bar) {
 
 function cb (err, result) {
 	if (err) {
-		console.log(error);
-	} else {
-		console.log(result);
-	  };
-	mongoose.connection.close(function() {console.log('Mongoose connection disconnected')});
+		logger.error(err)
+	}
+	// mongoose.connection.close(function() {console.log('Mongoose connection disconnected')});
 }
 
 
-function findBar() {
-	console.log('findBar() called')
-	// if (mongoose.connection.readyState === 0) {
-		var db = mongoose.connect('mongodb://piet:snot@ds025389.mlab.com:25389/local-bars');
-		// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
-		// var db = mongoose.connect('mongodb://localhost/bar-app');
-		barModel.find({"barName": barName,"address": address}, callback);
-	// }
-}
+// function findBar() {
+// 		mongoose.connection.on("open", function() {
+// 			barModel.find({"barName": barName,"address": address}, callback);
+// 		});
+
+// 		mongoose.connection.on("error", function(err) {
+// 		  logger.error(err);
+// 		});
+
+// 		mongoose.connect('mongodb://piet:snot@ds025389.mlab.com:25389/local-bars');
+
+// 		// var db = mongoose.connect('mongodb://piet:snot@ds047722.mlab.com:47722/pic-wall')
+// 		// var db = mongoose.connect('mongodb://localhost/bar-app');
+// 		// barModel.find({"barName": barName,"address": address}, callback);
+// 	// }
+// }
 
 function date(){
 	var dateObj = new Date();
@@ -73,7 +79,9 @@ router.post('/', function(req, res) {
 	id = req.body.id;
 	socialMedia = req.body.socialMedia;
 	barGoing = {"barName": barName,	"address": address, "date": date(), "going": [{"id": id,"socialMedia": socialMedia}]};
-	findBar();
+	// mongoose.connection.on("open", function() {
+	barModel.find({"barName": barName,"address": address}, callback);
+	// });
 });
 
 module.exports = router;

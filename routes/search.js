@@ -1,8 +1,9 @@
 'use strict';
 var express = require('express');
 var router = express.Router();
+var logger = require('../config/logger');
+
 var Yelp = require('yelp');
- 
 var yelp = new Yelp({
   consumer_key: 'DvCeGUNvObAY5Qo7QgPybQ',
   consumer_secret: 'ZH-q_0IyR3wNCoE7X9X6aRsO2kY',
@@ -17,7 +18,7 @@ router.post('/', function(req, res){
 	  res.json(data);
 	})
 	.catch(function (err) {
-	  console.error(err);
+	  logger.error(err);
 	});
 });
 
